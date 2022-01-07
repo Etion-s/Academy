@@ -3,6 +3,7 @@ package Part5;
 
 public class part5_8 {
     public static void main(String[] args) {
+        part5_8 p58 = new part5_8(); // 객체 생성 연습
         int[][] array = {
                 {95, 86},
                 {83,92,96},
