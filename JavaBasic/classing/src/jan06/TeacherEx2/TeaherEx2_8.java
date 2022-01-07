@@ -3,6 +3,6 @@ package jan06.TeacherEx2;
 
 public class TeaherEx2_8 {
     public static void main(String[] args) {
-        
+
     }
 }
