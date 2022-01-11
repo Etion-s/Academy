@@ -6,7 +6,7 @@ public class Ex1_driver {
 
         System.out.println("현재속도: " + e1.getSpeed());
 
-        e1.setSpeed(70);
+        e1.setSpeed(-200);
         System.out.println("현재속도: " + e1.getSpeed());
         if (!e1.isStop()){
             e1.setStop(true);

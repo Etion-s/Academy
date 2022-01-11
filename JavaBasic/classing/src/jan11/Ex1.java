@@ -1,7 +1,5 @@
 package jan11;
 
-import jan07.Exanything;
-
 public class Ex1 {
     private int speed;
     private boolean stop; // boolean의 초기값 = false
