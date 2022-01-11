@@ -1,19 +1,19 @@
 package Part6.Ex16_17;
 
 public class Printer {
-    public void println(int a){
+    public static void println(int a){
         System.out.println(a);;
     }
 
-    public void println(boolean a){
+    public static void println(boolean a){
         System.out.println(a);;
     }
 
-    public void println(double a){
+    public static void println(double a){
         System.out.println(a);;
     }
 
-    public void println(String a){
+    public static void println(String a){
         System.out.println(a);;
     }
 
