@@ -1,15 +1,19 @@
 package jan13.ExInterface;
 
-public class Telvision implements ReomteControl{
+public class SmartTelevision implements ReomteControl, Searchable{
     private int volume;
 
+    @Override
     public void turnOn(){
-        System.out.println("TV ON");
-    }
-    public void turnOff() {
-        System.out.println("TV OFF");
+        System.out.println("Smart TV ON");
     }
 
+    @Override
+    public void turnOff() {
+        System.out.println("Smart TV OFF");
+    }
+
+    @Override
     public void setVolume(int volume) {
         if(volume>ReomteControl.MAX_VOLUME) {
             this.volume = ReomteControl.MAX_VOLUME;
@@ -18,7 +22,11 @@ public class Telvision implements ReomteControl{
         } else {
             this.volume = volume;
         }
-        System.out.println("Now TV's Volume: "+volume);
+        System.out.println("Now Smart TV's Volume: "+volume);
     }
 
+    @Override
+    public void search(String url) {
+        System.out.println(url + "searching...");
+    }
 }

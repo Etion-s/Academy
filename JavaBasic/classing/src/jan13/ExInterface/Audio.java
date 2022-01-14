@@ -1,13 +1,13 @@
 package jan13.ExInterface;
 
-public class Telvision implements ReomteControl{
+public class Audio implements ReomteControl{
     private int volume;
 
     public void turnOn(){
-        System.out.println("TV ON");
+        System.out.println("Audio ON");
     }
     public void turnOff() {
-        System.out.println("TV OFF");
+        System.out.println("Audio OFF");
     }
 
     public void setVolume(int volume) {
@@ -20,5 +20,4 @@ public class Telvision implements ReomteControl{
         }
         System.out.println("Now TV's Volume: "+volume);
     }
-
 }

@@ -1,3 +1,4 @@
+/*
 package jan13.plo4;
 
 public class PhoneExample {
@@ -9,3 +10,4 @@ public class PhoneExample {
         smartPhone.turnOff();
     }
 }
+*/
