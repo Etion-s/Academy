@@ -1,4 +1,4 @@
-package jan13.plo5;
+package jan13.Ex_abstract;
 
 public class Dog extends Animal{
     public Dog() {

@@ -1,11 +1,10 @@
-package jan13.plo5;
+package jan13.Ex_abstract;
 
 public class Cat extends Animal{
     public Cat() {
         this.kind = "Cat";
     }
 
-    @Override
     public void sound() {
         System.out.println("냥냥!");
     }
