@@ -2,6 +2,7 @@ package jan14.Ex84_InterfaceHowToUse;
 
 public class Audio implements RemoteControl{
     private int volume;
+    private
 
     @Override
     public void turnOn() {
