@@ -1,3 +1,4 @@
+/*
 package jan13.plo4;
 
 public class SmartPhone extends Phone{
@@ -11,3 +12,4 @@ public class SmartPhone extends Phone{
         System.out.println("Searching....");
     }
 }
+*/
