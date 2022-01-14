@@ -1,3 +1,4 @@
+/*
 package jan14.Ex872_DefaultMethodInterfaceExtends;
 
 public class usingInterface implements ChildInterfaceA, ChildInterfaceB, ChildInterfaceC{
@@ -11,3 +12,4 @@ public class usingInterface implements ChildInterfaceA, ChildInterfaceB, ChildIn
 
     }
 }
+*/
