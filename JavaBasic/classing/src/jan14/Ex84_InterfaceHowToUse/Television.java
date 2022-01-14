@@ -3,6 +3,7 @@ package jan14.Ex84_InterfaceHowToUse;
 public class Television implements RemoteControl{
     // tv's field
     private int volume;
+    private boolean mute;
 
     // RemoteControl's real method()
     @Override
@@ -27,5 +28,13 @@ public class Television implements RemoteControl{
         System.out.println("Now TV's Volume: "+volume);
     }
 
-
+    @Override
+    public void setMute(boolean mute) {
+        this.mute = mute;
+        if (mute) {
+            System.out.println("TV Mute ON");
+        } else {
+            System.out.println("TV Mute OFF");
+        }
+    }
 }

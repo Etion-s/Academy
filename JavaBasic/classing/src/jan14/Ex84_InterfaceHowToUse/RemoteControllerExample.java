@@ -10,13 +10,17 @@ public class RemoteControllerExample {
 
         rc = new Audio();
         rc.turnOn();
-        rc.turnOff();*/
-        RemoteControl rc = new Television();
+        rc.turnOff();*/ // 인터페이스 사용방법 책.ver
+        RemoteControl rc = new Television(); // 나는 메뉴판에 있는 메뉴를 주문하면
         rc.turnOn();
-        rc.turnOff();
+        rc.setMute(true);
+        System.out.println("=====================");
 
         rc = new Audio();
         rc.turnOn();
-        rc.turnOff();
+        rc.setMute(true);
+        System.out.println("=====================");
+
+        RemoteControl.changeBattery();
     }
 }

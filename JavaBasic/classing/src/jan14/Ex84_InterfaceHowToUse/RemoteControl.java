@@ -1,6 +1,6 @@
 package jan14.Ex84_InterfaceHowToUse;
 
-public interface RemoteControl {
+public interface RemoteControl { // 여기서 implement된 실체객체들의 값을 리턴해준다
     // final static
     public int MAX_VOLUME = 10;
     public int MIN_VOLUME = 1;
