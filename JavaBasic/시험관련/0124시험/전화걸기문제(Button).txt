@@ -33,3 +33,18 @@ class ButtonClick implements Button.OnClickListener{
       System.out.println("외부에서 만든 진짜 클래스메시지를 보냅니다.");
    }
 }
+
+
+
+1. window의 클래스
+  - onClickListener라는 중첩 인터페이스 구현
+    > onCllck() 생성
+  - 위의 인터페이스의 변수 생성
+  - setter 생성 > 파라메터=onClickListner의 인터페이스
+    > 파라메터를 위의 변수에 저장 (this 활용)
+  - Button의 클래스에 touch() 생성
+    > 중첩인터페이스의 메소드 실행
+2. 버튼을 상속받는 클래스 2개 생성
+  - 중첩 인터페이스를 구현시킨다
+3. 실행 클래스 생성
+  - window의 클래스르 생성하고 안의 중첩 인터페이스의 메소드 실행

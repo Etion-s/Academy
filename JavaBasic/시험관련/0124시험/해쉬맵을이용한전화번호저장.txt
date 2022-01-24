@@ -44,3 +44,7 @@ public class NumberBook {
       
    }
 }
+
+1. 총 사용자수 입력
+    - name , number를 사용 한다
+2. 반복문을 활용 하여 HashMap에 있는 내용 가져오기

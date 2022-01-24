@@ -18,3 +18,6 @@ public class RandomSum {
    }
 
 }
+
+random()은 스태틱 메소드로써 바로 호출 가능하다
+random()은 0~0.9 까지 이므로 int형으로 cating한 후에 +1을 해준다
