@@ -5,8 +5,8 @@ public class Random2 {
         Scanner sc = new Scanner(System.in);
         System.out.println("난수 갯수를 입력하세요");
         int count = sc.nextInt();
-
         int sum = 0;
+
         for (int i=0; i<count; i++){
             int num = (int)(Math.random()*45+1);
             System.out.println("난수발생: "+num);
