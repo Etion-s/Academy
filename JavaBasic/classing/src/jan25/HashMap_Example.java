@@ -30,5 +30,9 @@ public class HashMap_Example {
         }
         System.out.println();
 
+        //  객체 삭제
+        map.remove("유동혁");
+        System.out.println(map.size());
+
     }
 }
