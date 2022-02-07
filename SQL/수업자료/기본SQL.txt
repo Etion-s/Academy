@@ -1,0 +1,78 @@
+***SQLDeveloper***
+ : 새로만들기
+   Name : system
+   사용자 이름 : system(슈퍼유저)
+   비밀번호 : oracle
+   호스트이름 : localhost
+   포트 : 1521
+   SID : xe(데이터베이스이름)
+
+ : 계정생성
+   system계정으로 접속한 상태에서
+   ez과 scott 계정을 생성한다.
+   create user ez identified by oracle;
+   create user scott identified by tiger;
+
+   계정생성 후 권한부여를 해야한다.
+   grant resource, connect to ez;
+   grant resource, connect to scott;
+
+ : 새로만들기
+   Name : ez
+   사용자 이름 : ez
+   비밀번호 : oracle
+   호스트이름 : localhost
+   포트 : 1521
+   SID : xe(데이터베이스이름)
+
+ : 새로만들기
+   Name : scott
+   사용자 이름 : scott
+   비밀번호 : tiger
+   호스트이름 : localhost
+   포트 : 1521
+   SID : xe(데이터베이스이름)
+
+=======================================================
+
+#테이블 만들기
+create table MEMBER (
+   MEMBERID      VARCHAR2(10) NOT NULL PRIMARY KEY,
+   PASSWORD      VARCHAR2(10) NOT NULL,
+   NAME          VARCHAR2(20) NOT NULL,
+   EMAIL         VARCHAR2(80)
+);
+
+#데이터 입력하기
+insert into member values('SSOL','1234','홍길동','hh@Daum.net');
+insert into member values('SSL','1234','홍길동형','hhh@Daum.net');
+insert into member values('SSS','1234','홍길동누나','hh11@Daum.net');
+insert into member values('SSSS','1234','홍길동아들','hh222@Daum.net');
+insert into member values('SSLL','1234','홍길동딸','hhhh@Daum.net');
+
+#데이터 꺼내기
+ - 전체 꺼내기
+   select * from member;
+ - 조건검색
+   select * from member 
+   where memberid = 'SSOL';
+
+#데이터 수정
+update member
+set name = '홍길동엄마'
+where memberid = 'SSS';
+
+#데이터 삭제
+delete from member
+where memberid = 'SSS';
+
+
+
+
+
+
+
+
+
+
+

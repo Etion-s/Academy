@@ -1,0 +1,278 @@
+<< 숫자 함수 >>
+1. COS 함수
+COSINE 값을 반환한다.
+
+2. EXP 함수
+E(2.71828183...)의 N승을 반환한다.
+
+3. LOG 함수
+LOG값을 반환한다.
+
+4. POWER 함수
+POWER(m, n)
+m의 n승을 반환한다.
+
+5. SIGN 함수
+SIGN(n)
+n<0이면 -1, n=0이면 0, n>0이면 1을 반환한다.
+
+6. SIN 함수
+SINE값을 반환한다.
+
+7. TAN 함수
+TANGENT값을 반환한다.
+
+8. ABS 함수
+절대값을 반환한다.
+ex> -15의 절대값을 구한다.
+SELECT ABS(-15)
+FROM DUAL;
+
+9. FLOOR 함수
+소수점 아래를 잘라낸다.(버림)
+ex> 34.5678의 소수점 아래를 잘라낸다.
+SELECT FLOOR(34.5678)
+FROM DUAL;
+
+10. ROUND 함수
+특정 자릿수에서 반올림한다.
+ROUND(대상, 표시할 자릿수)
+표시할 자릿수 바로 아래 자리에서 반올림
+두번째 인자값이 생략되면 0으로 간주
+ex>
+ROUND(35.12, 1)	소수점 이하 2번째 자리에서 반올림해서 1번째 자리까지 구함 		35.1
+ROUND(21.125, 2)	소수점 이하 3번째 자리에서 반올림해서 2번째 자리까지 구함 		21.13
+ROUND(47.51)		소수점 이하 1번째 자리에서 반올림해서 구함							48
+ROUND(834.12, -1)	소수점 위 1번째 자리에서 반올림해서 구함							830
+ROUND(653.54, -2)	소수점 위 2번째 자리에서 반올림해서 구함							700
+ex> 12.345을 소수점 이하 3번째자리에서, 34.567을 소수점 이하 1번째 자리에서
+      56.789를 소수점 이하 1번째 자리에서, 78.901을 소수점 위 1번째 자리에서 반올림
+SELECT ROUND(12.345, 2), ROUND(34.567,0), ROUND(56.789), ROUND(78.901,-1)
+FROM DUAL;
+-> 12.35, 35, 57, 80
+
+11. TRUNC 함수
+특정 자릿수에서 잘라낸다.(버림)
+TRUNC(대상, 표시할 자릿수)
+표시할 자릿수 바로 아래 자리에서 버림
+두번째 인자값이 생략되면 0으로 간주
+ex> 12.345를 소수점 이하 3번재 자리에서, 34.567을 소수점 이하 1번째 자리에서
+      56.789를 소수점 이하 1번재 자리에서, 78.901을 소수점 위 1번째 자리에서 버림
+SELECT TRUNC(12.345,2), TRUNC(34.567,0), TRUNC(56.789), TRUNC(78.901,-1)
+FROM DUAL;
+-> 12.34, 34, 56, 70
+
+12. MOD 함수
+입력 받은 수를 나눈 나머지 값을 반환한다.
+MOD(입력 받은 수, 나눌 수) 		-> 입력받은 수 % 나눌 수
+ex> 34를 2로 나눈 나머지, 34를 5로 나눈 나머지, 34를 7로 나눈 나머지의 값을 구함
+SELECT MOD(34, 2), MOD(34, 5), MOD(34, 7)
+FROM DUAL;
+
+
+<< 날짜 함수 >>
+DATE형에 사용하는 함수로 결과 값으로 날짜 또는 기간을 얻는다
+
+1. SYSDATE 함수
+시스템에 저장된 현재 날짜를 반환한다.
+날짜형 데이터는 더하기나 빼기 와 같은 연산을 할 수 있다.
+ex> 현재 날짜를 출력
+SELECT SYSDATE
+FROM DUAL;
+ex> 어제 날짜, 현재 날짜, 내일 날짜를 출력
+SELECT SYSDATE-1 AS "어제", SYSDATE AS "오늘", SYSDATE+1 AS "내일"
+FROM DUAL; 
+
+# 칼럼에 별칭 사용하기
+칼럼명 대신 별칭을 지정 가능, 출력되는 값은 칼럼의 값이지만 헤딩에 출력되는 것은 별칭
+ex> DEPTNO의 별칭을 부서번호, DNAME의 별칭을 부서명으로, LOC의 별칭을 지역명으로 변환해서
+DEPT의 DEPTNO, DNAME, LOC를 출력
+SELECT DEPTNO AS "부서번호", DNAME AS "부서명", LOC AS "지역명"
+FROM DEPT;
+
+ex> 부서번호가 10인 사원을 대상으로 입사한 날로부터 오늘까지 며칠이 흘렀는지 근무일수를 구함
+SELECT EMPNO, ENAME, HIREDATE, SYSDATE, FLOOR(SYSDATE-HIREDATE) AS "근무일수"
+FROM EMP
+WHERE DEPTNO=10;
+
+2. MONTHS_BETWEEN 함수
+두 날짜 사이의 간격을 계산한다.
+MONTHS_BETWEEN(DATE1, DATE2)
+-> DATE1-DATE2의 형식, 앞 날짜가 나중 날짜여야 한다.
+ex> 부서번호가 10인 사원을 대상으로 
+     오늘을 기준으로 입사한 날로부터 몇개월이 흘렀는지 근무월수를 구함
+SELECT EMPNO, ENAME, HIREDATE, SYSDATE,
+    FLOOR(MONTHS_BETWEEN(SYSDATE, HIREDATE)) AS 근무월수
+FROM EMP
+WHERE DEPTNO=10;
+
+3. ADD_MONTHS 함수
+특정 개월 수를 더한 날짜를 구하는 함수
+ADD_MONTHS(DATE1, 더할 개월수)
+ex> 부서번호가 10인 사원을 대상으로 입사일에서 3개월이 지난 날짜를 구하라
+SELECT EMPNO, ENAME, HIREDATE, ADD_MONTHS(HIREDATE, 3) AS "입사후 3개월"
+FROM EMP
+WHERE DEPTNO=10;
+
+4. NEXT_DAY 함수
+해당 날짜를 기준으로 지정한 요일이 가장 빨리 다가오는 날짜를 반환
+NEXT_DAY(DATE, 요일)
+ex> 오늘을 기준으로 최초로 다가오는 수요일은 언제인지 구한다.
+SELECT NEXT_DAY(SYSDATE, '수요일')
+FROM DUAL;
+-> '수요일' 대신 '수' 가능, 일요일~토요일 기준으로 1, 2, ..., 7로 입력 가능
+ex> 오늘을 기준으로 최초로 다가오는 수요일을 구한다. NEXT_DAY의 인자로 '수', 숫자 사용
+SELECT NEXT_DAY(SYSDATE, '수'), NEXT_DAY(SYSDATE, 4)
+FROM DUAL;
+# 요일을 영어로 사용할 경우 언어를 AMERICAN으로 지정
+ALTER SESSION SET NLS_LANGUAGE=AMERICAN;
+# 요일을 한글로 사용할 경우 언어를 KOREAN으로 지정
+ALTER SESSION SET NLS_LANGUAGE=KOREAN;
+ex> 오늘을 기준으로 최초로 다가오는 수요일을 구한다. 
+      NEXT_DAY의 인자로 'WENDSDAY', '수요일' 차례로 사용
+ALTER SESSION SET NLS_LANGUAGE=AMERICAN;
+SELECT NEXT_DAY(SYSDATE, 'WEDNSDAY')
+FROM DUAL;
+ALTER SESSION SET NLS_LANGUAGE=KOREAN;
+SELECT NEXT_DAY(SYSDATE, '수요일')
+FROM DUAL;
+
+5. LAST_DAY 함수
+해당 달의 마지막 날짜를 반환
+ex> 오늘 날짜의 마지막 달의 날짜를 구하라
+SELECT LAST_DAY(SYSDATE)
+FROM DUAL;
+
+6. ROUND 함수
+ROUND 함수의 포맷 모델을 지정하여 날짜에 대해서도 반올림을 할 수 있다.
+ROUND(DATE, '포맷')
+
+< 날짜 포맷 모델 >
+CC, SCC				4자리 연도의 끝 두 글자를 기준으로 반올림
+Q						한 분기의 두번째 달의 16일을 기준으로 반올림
+SYYY/YYYY			년(7월 1일부터 반올림)
+YEAR/SYEAR
+YYY/YY/Y
+MONTH/MON		월(16일을 기준으로 반올림)
+MM/RM
+DDD,D,J				일을 기준으로 반올림
+DAY,DY,D			한 주가 시작되는 날짜
+HH, HH12, HH24	시를 기준으로 반올림
+MI						분을 기준으로 반올림
+
+ROUND(DATE, 'MONTH')		-> 16일을 기준으로 반올림
+									-> 가장 가까운 달의 첫 날짜를 반환
+									-> ROUND('99/06/07', 'MONTH') : 99/06/01
+									-> ROUND('99/06/20', 'MONTH') : 99/07/01
+ROUND(DATE, 'DAY')			-> 가장 가까운 한주가 시작되는 날짜를 반환
+ROUND(DATE, 'YEAR')			-> 가장 가까운 1년이 시작되는 날짜를 반환
+
+ex> 부서번호가 10인 사원을 대상으로 입사일을 달 기준으로 반올림
+SELECT EMPNO, ENAME, HIREDATE, ROUND(HIREDATE, 'MONTH')
+FROM EMP
+WHERE DEPTNO=10;
+
+7. TRUNC 함수
+TRUNC 함수로 날짜도 잘라낼 수 있다.
+포맷을 기준으로 날짜를 자름
+ex> 부서번호가 10인 사원을 대상으로 입사일을 월 기준으로 잘라낸다
+SELECT EMPNO, ENAME, HIREDATE, TRUNC(HIREDATE, 'MONTH')
+FROM EMP
+WHERE DEPTNO=10;
+
+
+<< 변환 함수 >>
+자료형을 변환시키고자 할 때 사용하는 함수
+# 날짜형 / 숫자형 -> 문자형
+# 문자형 -> 날짜형
+# 문자형 -> 숫자형
+
+1. TO_CHAR 함수
+숫자나 날짜 형태의 데이터를 문자형으로 변환하는 함수
+TO_CHAR(DATE, '출력 형식')	
+
+# 날짜형을 문자형으로 변환
+< 날짜 데이터 출력 형식 >
+YYYY		년도 표시(4자리)
+YY			년도 표시(2자리)
+MM		월을 숫자로 표시
+MON		월을 숫자+월 로 표시
+DD		일 표시
+DAY		요일 표시
+DY			요일을 약어로 표시
+< 시간 출력 형식 >
+AM/PM		오전(AM), 오후(PM) 시각 표시
+A.M/P.M		오전(A.M), 오후(P.M) 시각 표시
+HH/HH12	시간(1~12)
+HH24			시간24(0~23)
+MI				분
+SS				초
+
+ex> 현재 시간을 년도(4자리)-월-일 의 형식으로 출력
+SELECT TO_CHAR(SYSDATE, "YYYY-MM-DD')
+FROM DUAL;
+ex> 부서가 10인 사원들의 입사일을 출력하되 요일까지 함께 출력
+SELECT EMPNO, ENAME, HIREDATE, TO_CHAR(HIREDATE, 'YYYY-MM-DD DAY')
+FROM EMP
+WHERE DEPTNO=10;
+SELECT EMPNO, ENAME, HIREDATE, TO_CHAR(HIREDATE, 'YYYY-MM-DD DY')
+FROM EMP
+WHERE DEPTNO=10;
+ex> 현재 시간을 년/월/일 시(24):분:초 의 형식으로 출력
+SELECT TO_CHAR(SYSDATE, 'YYYY/MM/DD H24:MI:SS')
+FROM DUAL;
+
+# 숫자형을 문자형으로 변환
+< 숫자 출력 형식 >
+0				자릿수를 나타내며 자릿수가 맞지 않을 경우 0으로 채움
+9				자릿수를 나타내면 자릿수가 맞지 않아도 채우지 않는다
+L				각 지역별 통화 기호를 앞에 표시
+S				+표시
+.				소수점
+,				천 단위 자리 구분
+ex> 숫자 출력 예
+숫자					형식								결과
+12345.67				999,999.999						12,345.67
+12345.67				999999							12345
+12345.67				$999,999.99						$12,345.67
+12345.67				L999,999.99						\12,345.67
+12345.67				S999,999.99						+12,345.67
+ex> 부서번호가 10인 사원의 이름과 급여, 그리고 급여를 원화로 출력
+SELECT ENAME, SAL, TO_CHAR(SAL, 'L999,999')
+FROM EMP
+WHERE DEPTNO=10;
+ex> 부서번호가 10인 사원의 이름과 급여, '123456'을 출력
+SELECT ENAME, SAL, TO_CHAR(123456, '999,999')
+FROM EMP
+WHERE DEPTNO=10;
+ex> 1981년 2월 20일에 입사한 사원을 검색
+SELECT EMPNO, ENAME, HIREDATE
+FROM EMP
+WHERE TO_CHAR(HIREDATE, 'YYYY/MM/DD') = '1981/02/20';
+
+2. TO_DATE 함수
+문자를 날짜로 변환하는 함수 (숫자도 됨)
+TO_DATE('문자', '출력형식')
+ex> 1981년 2월 20일에 입사한 사원을 검색
+SELECT EMPNO, ENAME, HIREDATE
+FROM EMP
+WHERE HIREDATE = TO_DATE(19810220, 'YYYYMMDD');
+ex> 올해 며칠이 지났는지 날짜 계산 // 잘못된 예
+SELECT SYSDATE-'2008/01/01'
+FROM DUAL;											-> 오류 발생
+ex> 올해 며칠이 지났는지 날짜 계산
+SELECT TRUNC(SYSDATE-TO_DATE('2008/01/01', 'YYYY/MM/DD'))
+FROM DUAL;
+
+3. TO_NUMBER 함수
+문자를 숫자로 변환하는 함수
+TO_NUMBER('문자', '출력 형식')
+ex> '10,000' + '20,000'의 합계 // 잘못된 예
+SELECT '10,000' + '20,000'
+FROM DUAL;											-> 오류 발생
+ex> '10,000' + '20,000'의 합계 
+SELECT TO_NUMBER('10,000', '999,999') + TO_NUMBER('20,000', '999,999')
+FROM DUAL;
+
+
+<< 일반 함수 >>

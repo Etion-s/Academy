@@ -1,0 +1,33 @@
+<< 데이터베이스 개요 >>
+데이터베이스 : 빠른 탐색과 검색을 위해 조직된 데이터의 집합체
+
+DBMS : 데이터베이스를 관리하기 위한 시스템
+- 기능
+1. 데이터의 추가/조회/변경/삭제
+2. 데이터의 무결성 유지
+3. 트랜잭션 관리
+4. 데이터의 백업 및 복원
+5. 데이터 보안
+
+- SQL Plus 로그인
+sqlplus 계정/암호
+
+- SQL의 종류 : DML DCL DDL TCL
+# DML : 데이터 조작 언어
+SELECT
+INSERT
+UPDATE
+DELETE
+# DDL : 데이터 정의 언어
+CREATE
+ALTER
+RENAME
+TRUNCATE
+DROP
+# TCL : 트랜잭션 관련 언어
+COMMIT
+ROLLBACK
+SAVEPOINT
+# DCL : 사용자 계정 관련 언어
+GRANT
+REVOKE
