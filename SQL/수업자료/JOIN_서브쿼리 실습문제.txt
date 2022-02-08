@@ -1,0 +1,105 @@
+JOIN 실습문제
+SCOTT 계정의 연습용 테이블 사용
+
+오라클 조인도 사용해보고 ANSI조인도 사용해보기 
+
+1. 부서 테이블과 사원테이블에서 사번, 사원명, 부서코드, 부서명을 검색하시오. ( 사원명 오름차순 정렬할 것 )
+SELECT E.EMPNO,E.ENAME,D.DEPTNO,D.DNAME
+FROM EMP E, DEPT D
+ORDER BY E.ENAME;
+
+SELECT E.EMPNO,E.ENAME,D.DEPTNO,D.DNAME
+FROM EMP E CROSS JOIN DEPT D
+ORDER BY E.ENAME;
+
+2. 부서 테이블과 사원테이블에서 사번, 사원명 , 급여 , 부서명을 검색하시오. 단, 급여가 2000 이상인 사원에 대하여 급여기준으로 내림차순 정렬할 것.
+SELECT E.EMPNO,E.ENAME,E.SAL,D.DNAME
+FROM EMP E, DEPT D
+WHERE E.SAL >= 2000
+ORDER BY E.SAL DESC;
+
+SELECT E.EMPNO,E.ENAME,E.SAL,D.DNAME
+FROM EMP E CROSS JOIN DEPT D
+WHERE E.SAL >= 2000
+ORDER BY E.SAL DESC;
+
+3. 부서 테이블과 사원 테이블에서 사번, 사원명, 업무, 급여 , 부서명을 검색하시오. 단, 업무가 Manager이며 급여가 2500 이상인 사원에 대하여 사번을 기준으로 오름차순 정렬할 것.
+SELECT E.EMPNO,E.ENAME,E.JOB,E.SAL,D.DNAME
+FROM EMP E, DEPT D
+WHERE E.JOB = 'MANAGER' AND E.SAL>=2500
+ORDER BY E.EMPNO;
+
+SELECT E.EMPNO,E.ENAME,E.JOB,E.SAL,D.DNAME
+FROM EMP E CROSS JOIN DEPT D
+WHERE E.JOB = 'MANAGER' AND E.SAL>=2500
+ORDER BY E.EMPNO;
+
+4. 사원 테이블과 급여 등급 테이블에서 사번, 사원명, 급여, 등급을 검색하시오. 단, 등급은 급여가 하한값과 상한값 범위에 포함되고 등급이 4이며 급여를 기준으로 내림차순정렬할 것.
+SELECT E.EMPNO,E.ENAME,E.SAL,S.GRADE
+FROM EMP E, SALGRADE S
+WHERE S.GRADE = 4 AND E.SAL BETWEEN S.LOSAL AND S.HISAL;
+
+SELECT E.EMPNO,E.ENAME,E.SAL,S.GRADE
+FROM EMP E CROSS JOIN SALGRADE S
+WHERE S.GRADE = 4 AND E.SAL BETWEEN S.LOSAL AND S.HISAL;
+
+
+5. 부서 테이블, 사원 테이블, 급여등급 테이블에서 사번, 사원명, 부서명, 급여 , 등급을 검색하시오. 단, 등급은 급여가 하한값과 상한값 범위에 포함되며 등급을 기준으로 내림차순 정렬할 것.
+SELECT E.EMPNO,E.ENAME,D.DNAME,E.SAL,S.GRADE
+FROM EMP E, DEPT D, SALGRADE S
+WHERE E.SAL BETWEEN S.LOSAL AND S.HISAL
+ORDER BY S.GRADE DESC;
+
+SELECT E.EMPNO,E.ENAME,D.DNAME,E.SAL,S.GRADE
+FROM EMP E CROSS JOIN DEPT D CROSS JOIN SALGRADE S
+WHERE E.SAL BETWEEN S.LOSAL AND S.HISAL
+ORDER BY S.GRADE DESC;
+
+6. 사원 테이블에서 사원명과 해당 사원의 관리자명을 검색하시오
+SELECT WORK.ENAME, MANAGER.ENAME
+FROM EMP WORK, EMP MANAGER
+WHERE WORK.MGR = MANAGER.EMPNO;
+
+SELECT WORK.ENAME, MANAGER.ENAME
+FROM EMP WORK CROSS JOIN EMP MANAGER
+WHERE WORK.MGR = MANAGER.EMPNO;
+
+7. 사원 테이블에서 사원명, 해당 사원의 관리자명, 해당 사원의 관리자의 관리자명을 검색하시오
+
+8. 7번 결과에서 상위 관리자가 없는 모든 사원의 이름도 사원명에 출력되도록 수정하시오.
+
+9. 20번 부서의 이름과 그 부서에 근무하는 사원의 이름을 출력하시오.
+SELECT D.DNAME, E.ENAME
+FROM DEPT D,(CROSS JOIN) EMP E
+WHERE E.DEPTNO = 20;
+
+10. 커미션을 받는 사원의 이름, 커미션, 부서이름 출력하시오.
+SELECT E.ENAME, E.COMM, D.DNAME
+FROM DEPT D,(CROSS JOIN) EMP E
+WHERE E.COMM>0;
+
+11. 이름에 'A' 가 들어가는 사원들의 이름과 부서명 출력하기.
+SELECT E.ENAME, D.DNAME
+FROM DEPT D,(CROSS JOIN) EMP E
+WHERE E.ENAME LIKE '%A%';
+
+12. DALLAS에 근무하는 사원 중 급여 1500 이상인 사원의 이름, 급여, 입사일 , 보너스(comm)을 출력하시오.
+
+13. 자신의 관리자 보다 연봉(sal)을 많이 받는 사원의 이름과 연봉을 출력하시오.
+
+14. 직원 중 현재시간 기준으로 근무 개월 수가 30년(12 * 30개월) 보다 많은 사람의 이름, 급여 , 입사일 , 부서명을 출력하시오
+
+15. 각 부서별로 1982년 이전에 입사한 직원들의 인원수를 출력하시오.
+
+서브쿼리 실습문제
+ 
+
+1. 사원 테이블에서 BLAKE 보다 급여가 많은 사원들의 사번, 이름 , 급여를 검색하시오.
+
+2. 사원 테이블에서 MILLER 보다 늦게 입사한 사원의 사번, 이름, 입사일을 검색하시오
+
+3. 사원 테이블에서 사원 전체 평균 급여보다 급여가 많은 사원들의 사번, 이름 , 급여를 검색하시오.
+
+4. 사원 테이블에서 부서별 최대 급여를 받는 사원들의 사번, 이름, 부서코드, 급여를 검색하시오.
+
+5. Salgrade가 2등급인 사원들의 평균 급여보다 적게 받는 사원 정보를 검색하시오.
