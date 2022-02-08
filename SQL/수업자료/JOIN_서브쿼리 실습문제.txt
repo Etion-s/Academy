@@ -84,12 +84,18 @@ FROM DEPT D,(CROSS JOIN) EMP E
 WHERE E.ENAME LIKE '%A%';
 
 12. DALLAS에 근무하는 사원 중 급여 1500 이상인 사원의 이름, 급여, 입사일 , 보너스(comm)을 출력하시오.
+SELECT E.ENAME, E.SAL, E.HIREDATE, E.COMM
+FROM DEPT D,(CROSS JOIN) EMP E
+WHERE D.LOC ='DALLAS' AND E.SAL>=1500;
 
 13. 자신의 관리자 보다 연봉(sal)을 많이 받는 사원의 이름과 연봉을 출력하시오.
 
 14. 직원 중 현재시간 기준으로 근무 개월 수가 30년(12 * 30개월) 보다 많은 사람의 이름, 급여 , 입사일 , 부서명을 출력하시오
 
 15. 각 부서별로 1982년 이전에 입사한 직원들의 인원수를 출력하시오.
+SELECT E.ENAME, E.SAL, E.HIREDATE, D.DNAME
+FROM EMP E, DEPT D
+WHERE E.HIREDATE < '1982/01/01';
 
 서브쿼리 실습문제
  
