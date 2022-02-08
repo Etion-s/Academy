@@ -101,8 +101,18 @@ WHERE E.HIREDATE < '1982/01/01';
  
 
 1. 사원 테이블에서 BLAKE 보다 급여가 많은 사원들의 사번, 이름 , 급여를 검색하시오.
+SELECT E.EMPNO, E.ENAME, E.SAL
+FROM EMP E
+WHERE SAL > (SELECT E.SAL
+             FROM EMP E
+             WHERE E.ENAME = 'BLAKE');
 
 2. 사원 테이블에서 MILLER 보다 늦게 입사한 사원의 사번, 이름, 입사일을 검색하시오
+SELECT E.EMPNO, E.ENAME, E.HIREDATE
+FROM EMP E
+WHERE E.HIREDATE < (SELECT E.HIREDATE
+                    FROM EMP E
+                    WHERE E.ENAME = 'MILLER');
 
 3. 사원 테이블에서 사원 전체 평균 급여보다 급여가 많은 사원들의 사번, 이름 , 급여를 검색하시오.
 
