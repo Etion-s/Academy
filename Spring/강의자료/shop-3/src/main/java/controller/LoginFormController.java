@@ -39,7 +39,7 @@ public class LoginFormController {
 
 	@RequestMapping(method = RequestMethod.POST)
 	public ModelAndView onSubmit(User user, BindingResult bindingResult) {
-
+		// bindingResult : °ËÁõ¿À·ù°¡ ¹ß»ıÇÒ °æ¿ì ³»¿ëÀ» º¸°üÇÏ´Â SpringÁ¦°ø°´Ã¼
 		this.loginValidator.validate(user, bindingResult);
 
 		ModelAndView modelAndView = new ModelAndView();
@@ -49,16 +49,18 @@ public class LoginFormController {
 		}
 
 		try {
-			// ìœ ì € ì •ë³´ ê²€ìƒ‰
+			// À¯Àú Á¤º¸ °Ë»ö
 			User loginUser = this.shopService.getUserByUserIdAndPassword(user.getUserId(), user.getPassword());
 
-			// ìœ ì €ê°€ ìˆì„ ë•Œ
+			// À¯Àú°¡ ÀÖÀ» ¶§
 			modelAndView.setViewName("loginSuccess");
 			modelAndView.addObject("loginUser", loginUser);
 			return modelAndView;
 		} catch (EmptyResultDataAccessException e) {
-			// ìœ ì €ê°€ ì—†ì„ ë•Œ
+			// À¯Àú°¡ ¾øÀ» ¶§
 			bindingResult.reject("error.login.user");
+			// bindingResult: ErrorsÀÇ ÇÏÀ§ ÀÎÅÍÆäÀÌ½º·Î¼­ Æû °ªÀ» Ä¿¸Çµå °´Ã¼¿¡ ¹ÙÀÎµùÇÑ °á°ú¸¦ ÀúÀåÇÏ°í ¿¡·¯ÄÚµå¸¦ °¡Á®¿È
+			// reject(String errorCode) : Àü °´Ã¼¿¡ ´ëÇÑ ±Û·Î¹ú ¿¡·¯ÄÚµå Ãß°¡
 			modelAndView.getModel().putAll(bindingResult.getModel());
 			return modelAndView;
 		}

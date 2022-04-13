@@ -21,7 +21,7 @@ public class DetailController {
 	}
 	
 	@RequestMapping
-	public ModelAndView  detailItem(Integer itemId){
+	public ModelAndView detailItem(Integer itemId){
 		// 선택된 상품ID에서 상품 정보를 취득
 		Item item = this.shopService.getItemByItemId(itemId);
 
