@@ -38,7 +38,7 @@ public class LoginController {
 		String userId = loginModel.getUserId();
 		String userPw = loginModel.getUserPw();
 	
-		context = new ClassPathXmlApplicationContext("SummerBoard/config/applicationContext.xml"); // 매개변수를 넣어주는 xml을 수동으로 스프링컨테이너를 만들어준다
+		context = new ClassPathXmlApplicationContext("/config/applicationContext.xml"); // 매개변수를 넣어주는 xml을 수동으로 스프링컨테이너를 만들어준다
 		// 사용 이유 : 로그인 할때 DB를 사용하기 위해서
 		LoginService loginService = (LoginService) context.getBean("loginService");
 		LoginSessionModel loginCheckResult = loginService.checkUserId(userId);

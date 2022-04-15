@@ -15,9 +15,9 @@
     		</dataSource>
     	</transactionManager>
     	
-    <!--  -->
-	<!-- <sqlMap resource="net.smboard/ibatis/board.xml" /> -->
-	<sqlMap resource="net.smboard/ibatis/login.xml" />
-	<sqlMap resource="net.smboard/ibatis/member.xml" />
+    
+	<sqlMap resource="net/smboard/ibatis/board.xml" />
+	<sqlMap resource="net/smboard/ibatis/login.xml" />
+	<sqlMap resource="net/smboard/ibatis/member.xml" />
 	
     </sqlMapConfig>

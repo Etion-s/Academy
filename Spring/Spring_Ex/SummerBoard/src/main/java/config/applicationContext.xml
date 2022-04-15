@@ -22,7 +22,7 @@
    	<bean id="sqlMapClient"
    		class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
    		<property name="dataSource" ref="dataSource" />
-   		<property name="configLocation" value="classpath:/config/sqlMapConfig.xml" />	
+   		<property name="configLocation" value="classpath:config/sqlMapConfig.xml" />	
    	</bean>
    	
    	<bean id="sqlMapClientTemplate"
@@ -40,7 +40,7 @@
    		<property name="sqlMapClientTemplate" ref="sqlMapClientTemplate" />
    	</bean>
    	
-   	<bean id="boardService" class="net.nice19.board.service.BoardService">
+   	<bean id="boardService" class="net.smboard.board.service.BoardService">
    		<property name="sqlMapClientTemplate" ref="sqlMapClientTemplate" />
    	</bean>
        

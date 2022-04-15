@@ -27,6 +27,7 @@ public class MemberController {
 	public ModelAndView addMember(@ModelAttribute("MemberModel") MemberModel memberModel, BindingResult result){
 		ModelAndView mav = new ModelAndView();
 		new MemberValidatior().validate(memberModel, result);
+		
 		if(result.hasErrors()){
 			mav.setViewName("/board/join");
 			return mav;

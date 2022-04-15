@@ -4,144 +4,139 @@
     "http://ibatis.apache.org/dtd/sql-map-2.dtd">
     
 <sqlMap namespace="board">
-	<typeAlias alias="BoardModel" type="net.smboard.board.model.BoardModel"/>
-	<typeAlias alias="BoardCommentModel" type="net.nice19.smboard.board.model.BoardCommentModel"/>	
-	<select id="getBoardList" parameterClass="java.util.HashMap" resultClass="BoardModel">
-		select 
-			b.idx, b.writer, b.subject,
-			b.content, b.hitcount, b.recommendcount,
-			to_char(b.writedate, 'YYYY-MM-DD HH:MI:SS') writeDate, 
-			count(c.idx) as "comment",
-			b.writerId, b.fileName, b.rnum
-		from (select 
-				a.idx, a.writer, a.subject,
-				a.content, a.hitcount, a.recommendcount,
-				a.writedate, a.writerId, a.fileName, rownum rnum
-			from (select 
-					idx, writer, subject,
-					content, hitcount, recommendcount,
-					writedate, writerId, fileName
-				from jmboard
-        		order by idx desc) a
+   <typeAlias alias="BoardModel" type="net.smboard.board.model.BoardModel"/>
+   <typeAlias alias="BoardCommentModel" type="net.smboard.board.model.BoardCommentModel"/>   
+   
+   <!-- public List<BoardModel> getBoardList(Map map) -->
+   <select id="getBoardList" parameterClass="java.util.HashMap" resultClass="BoardModel">
+      select 
+         b.idx, b.writer, b.subject,
+         b.content, b.hitcount, b.recommendcount,
+         to_char(b.writedate, 'YYYY-MM-DD HH:MI:SS') writeDate, 
+         count(c.idx) as "comment",
+         b.writerId, b.fileName, b.rnum
+      from (select 
+            a.idx, a.writer, a.subject,
+            a.content, a.hitcount, a.recommendcount,
+            a.writedate, a.writerId, a.fileName, rownum rnum
+         from (select 
+               idx, writer, subject,
+               content, hitcount, recommendcount,
+               writedate, writerId, fileName
+            from jmboard
+              order by idx desc) a
         ) b left outer join jmboard_comment c on b.idx = c.linkedarticlenum
-	    where rnum between #startArticleNum# and #endArticleNum#
-	    group by
-	    	b.idx, b.writer, b.subject, 
-	    	b.content, b.hitcount, b.recommendcount, 
-	    	b.writedate, b.rnum, b.writerId, b.fileName
-	    order by b.idx desc		
-	</select>
-	
-	<select id="getTotalNum" resultClass="int">
-		select 
-			count(idx)
-		from jmboard
-	</select>
-	
-	<select id="getSearchTotalNum" resultClass="int">
-		select 
-			count(idx)
-		from jmboard
-		where $type$ like '%$keyword$%'
-	</select>
-	
-	<select id="searchArticle" parameterClass="java.util.HashMap" resultClass="BoardModel">
-		select 
-			b.idx, b.writer, b.subject,
-			b.content, b.hitcount, b.recommendcount,
-			to_char(b.writedate, 'YYYY-MM-DD HH:MI:SS') writeDate, 
-			count(c.idx) as "comment", 
-			b.writerId, b.fileName, b.rnum
-		from (select 
-				a.idx, a.writer, a.subject,
-				a.content, a.hitcount, a.recommendcount,
-				a.writedate, a.writerId, a.fileName, rownum rnum
-			from (select 
-					idx, writer, subject,
-					content, hitcount, recommendcount,
-					writedate, writerId, fileName
-				from jmboard
-				where $type$ like '%$keyword$%'
-        		order by idx desc) a
+       where rnum between #startArticleNum# and #endArticleNum#
+       group by
+          b.idx, b.writer, b.subject, 
+          b.content, b.hitcount, b.recommendcount, 
+          b.writedate, b.rnum, b.writerId, b.fileName
+       order by b.idx desc      
+   </select>
+   
+   <!-- public int getTotalNum() -->
+   <select id="getTotalNum" resultClass="int">
+      select count(idx) from jmboard
+   </select>
+   
+   <!-- public int getSearchTotalNum(Map map) -->
+   <select id="getSearchTotalNum" resultClass="int">
+      select count(idx) from jmboard
+      where $type$ like '%$keyword$%'
+   </select>
+   
+   <!-- public List<BoardModel> searchArticle(Map map) -->
+   <select id="searchArticle" parameterClass="java.util.HashMap" resultClass="BoardModel">
+      select 
+         b.idx, b.writer, b.subject,
+         b.content, b.hitcount, b.recommendcount,
+         to_char(b.writedate, 'YYYY-MM-DD HH:MI:SS') writeDate, 
+         count(c.idx) as "comment", 
+         b.writerId, b.fileName, b.rnum
+      from (select 
+            a.idx, a.writer, a.subject,
+            a.content, a.hitcount, a.recommendcount,
+            a.writedate, a.writerId, a.fileName, rownum rnum
+         from (select 
+               idx, writer, subject,
+               content, hitcount, recommendcount,
+               writedate, writerId, fileName
+            from jmboard
+            where $type$ like '%$keyword$%'
+              order by idx desc) a
         ) b left outer join jmboard_comment c on b.idx = c.linkedarticlenum
-	    where rnum between #startArticleNum# and #endArticleNum#
-	    group by 
-	    	b.idx, b.writer, b.subject, 
-	    	b.content, b.hitcount, b.recommendcount, 
-	    	b.writedate, b.rnum, b.writerId, b.fileName
-	    order by b.idx desc		
-	</select>
-	
-	<select id="getOneArticle" parameterClass="int" resultClass="BoardModel">
-		select
-			idx,
-			writer,
-			subject,
-			content,
-			hitcount,
-			recommendcount,
-			writedate,
-			writerId,
-			fileName
-		from jmboard
-    	where idx = #idx#
-	</select>
-	
-	<select id="getCommentList" parameterClass="int" resultClass="BoardCommentModel">
-		select 
-			idx, writer, content, 
-			writeDate, linkedArticleNum, writerId
-		from jmboard_comment
-  		where linkedArticleNum = #idx#
-  		order by idx desc
-	</select>
-	
-	<select id="getOneComment" parameterClass="int" resultClass="BoardCommentModel">
-		select 
-			idx, writer,
-			content, 
-			writeDate, linkedArticleNum, writerId
-		from jmboard_comment
-  		where idx = #idx#		
-	</select>
-	
-	<insert id="writeArticle" parameterClass="BoardModel">
-		insert into jmboard(idx, writer, subject, content, hitcount, recommendcount, writeDate, writerId, fileName)
-			values(BOARDLISTSEQ.nextVal, #writer#, #subject#, #content#, 0, 0, sysdate, #writerId#, #fileName#)
-	</insert>
-	
-	<insert id="writeComment" parameterClass="BoardCommentModel">
-		insert into jmboard_comment(idx, writer, content, writeDate, linkedArticleNum, writerId)
-			values(BOARDCOMMENTSEQ.nextVal, #writer#, #content#, sysdate, #linkedArticleNum#, #writerId#)
-	</insert>
-	
-	<update id="updateHitcount" parameterClass="java.util.HashMap">
-		update 
-			jmboard 
-		set hitcount = #hitcount#
-		where idx = #idx#
-	</update>
-	<update id="updateRecommendcount" parameterClass="java.util.HashMap">
-		update
-			jmboard
-		set recommendcount = #recommendcount#
-		where idx = #idx#
-	</update>
-	<delete id="deleteComment" parameterClass="int">
-		delete
-		from jmboard_comment
-		where idx = #idx#
-	</delete>
-	<delete id="deleteArticle" parameterClass="int">
-		delete
-		from jmboard
-		where idx = #idx#	
-	</delete>
-	<update id="modifyArticle" parameterClass="BoardModel">
-		update jmboard
-		set subject = #subject#,
-			content = #content#,
-			fileName = #fileName#
-		where idx = #idx#
-	</update>
+       where rnum between #startArticleNum# and #endArticleNum#
+       group by 
+          b.idx, b.writer, b.subject, 
+          b.content, b.hitcount, b.recommendcount, 
+          b.writedate, b.rnum, b.writerId, b.fileName
+       order by b.idx desc      
+   </select>
+   
+   <!-- public BoardModel getOneArticle(int idx) -->
+   <select id="getOneArticle" parameterClass="int" resultClass="BoardModel">
+      select    idx, writer, subject, content, hitcount, recommendcount, writedate, writerId, fileName
+      from jmboard where idx = #idx#
+   </select>
+   
+   <!-- public List<BoardCommentModel> getCommentList(int idx) -->
+   <select id="getCommentList" parameterClass="int" resultClass="BoardCommentModel">
+      select idx, writer, content, writeDate, linkedArticleNum, writerId
+      from jmboard_comment where linkedArticleNum = #idx#
+        order by idx desc
+   </select>
+   
+   <!-- public BoardCommentModel getOneComment(int idx) -->
+   <select id="getOneComment" parameterClass="int" resultClass="BoardCommentModel">
+      select idx, writer, content, writeDate, linkedArticleNum, writerId
+      from jmboard_comment where idx = #idx#      
+   </select>
+   
+   <!-- public void writeArticle(WriteArticle writeArticle) -->
+   <insert id="writeArticle" parameterClass="BoardModel">
+      insert into jmboard(idx, writer, subject, content, hitcount, recommendcount, writeDate, writerId, fileName)
+         values(BOARDLISTSEQ.nextVal, #writer#, #subject#, #content#, 0, 0, sysdate, #writerId#, #fileName#)
+   </insert>
+   
+   <!-- public void writeComment(BoardCommentModel boardCommentModel) -->
+   <insert id="writeComment" parameterClass="BoardCommentModel">
+      insert into jmboard_comment(idx, writer, content, writeDate, linkedArticleNum, writerId)
+         values(BOARDCOMMENTSEQ.nextVal, #writer#, #content#, sysdate, #linkedArticleNum#, #writerId#)
+   </insert>
+   
+   <!-- public void updateHitcount(Map map) -->
+   <update id="updateHitcount" parameterClass="java.util.HashMap">
+      update jmboard 
+      set hitcount = #hitcount#
+      where idx = #idx#
+   </update>
+   
+   <!-- public void updateRecommendcount(Map map) -->
+   <update id="updateRecommendcount" parameterClass="java.util.HashMap">
+      update jmboard
+      set recommendcount = #recommendcount#
+      where idx = #idx#
+   </update>
+   
+   <!-- public void deleteComment(int idx) -->
+   <delete id="deleteComment" parameterClass="int">
+      delete from jmboard_comment
+      where idx = #idx#
+   </delete>
+   
+   <!-- public void deleteArticle(int idx) -->
+   <delete id="deleteArticle" parameterClass="int">
+      delete from jmboard
+      where idx = #idx#   
+   </delete>
+   
+   <!-- public void modifyArticle(BoardModel boardModel) -->
+   <update id="modifyArticle" parameterClass="BoardModel">
+      update jmboard
+      set subject = #subject#,
+         content = #content#,
+         fileName = #fileName#
+      where idx = #idx#
+   </update>
+   
 </sqlMap>

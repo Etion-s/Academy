@@ -10,14 +10,13 @@
     <!-- controllers -->   
 	<bean id="loginController"
     	class="net.smboard.login.controller.LoginController" />
- 	
- 	<!-- 로그인 하고 해보자
+    	
  	<bean id="memberController"
  		class="net.smboard.member.controller.MemberController" />
  	
  	<bean id="boardController"
  		class="net.smboard.board.controller.BoardController" />
- 	 -->
+ 	
     
     <!-- viewResolver -->
     <bean id="vewResolver"
