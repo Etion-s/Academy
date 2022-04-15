@@ -16,5 +16,5 @@ public class LoginService implements LoginDao {
 	public LoginSessionModel checkUserId(String userId) {
 		return (LoginSessionModel) sqlMapClientTemplate.queryForObject("login.loginCheck", userId);
 	}
-	// login.loginCheck : 설정파일 namespace -> 같은 변수명이지만 사용할수있게 해준다 : 패키지를 생각하자	
+	
 }
