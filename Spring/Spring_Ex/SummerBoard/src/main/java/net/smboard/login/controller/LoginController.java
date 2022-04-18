@@ -27,8 +27,9 @@ public class LoginController {
 	public ModelAndView loginProc(@ModelAttribute("LoginModel") LoginSessionModel loginModel, BindingResult result, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		// html에서 받은 값들을 파라미터loginMoel로 받는다
-
-		// form validation
+		// @ModelAttribute : HTTP로 넘오 온 값들을 자동으로 바인딩한다
+		//   * 어노테이션이 붙은 객체가 자동으로 Model객체에 추가되고, 해당 객체가 jsp 뷰단까지 전달
+		
 		new LoginValidator().validate(loginModel, result);
 		if(result.hasErrors()){
 			mav.setViewName("/board/login");
@@ -56,6 +57,8 @@ public class LoginController {
 			session.setAttribute("userId", userId);
 			session.setAttribute("userName", loginCheckResult.getUserName());
 			mav.setViewName("redirect:/board/list.do");
+			// 리다이렉트 하면 request및response가 초기화 되기 때문에
+			// 세션에 담아서 넘긴다
 			return mav;
 		} else { // 비번이 틀림
 			mav.addObject("userId", userId);
