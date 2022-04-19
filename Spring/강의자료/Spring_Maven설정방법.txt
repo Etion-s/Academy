@@ -1,0 +1,25 @@
+1. 프로젝트 : 레거시 프로젝트로
+2. SPring MVC 프로젝트 클릭
+3. package 설정
+ * 3자리로 net.madvirsu.spring4
+4. 프로젝트 패싯 설정
+ * java = 11 버전으로 설정
+5. 자동으로 생성된 컨트롤러 지우기
+6. webapp의 home.jsp지우기
+7. spring폴더 지우기
+ -> web작업을 안할꺼기 때문에
+8. 따라서 새롭게 받은 prom.xml을 넣어서 적용해야 에러도 안나고 Maven Depaedenc도 새롭게 적용된다
+======
+중요 : 생성 되지도 않는 객체가 사용되는 이유는 xml설정파일 에서 DI때문
+BuildRunner = 인터페이스
+MevenBuildRunner = 위 인터페이스 구현
+ * 클래스안에서 객체 생성 안하는 이유
+  : 다른 클래스에서 사용 할떄 의존도가 너무 올라감
+ * 따라서 xml파일에서 관계 설정을 해서 사용한다
+Project
+ *
+
+Main : 객체를 클래스 내부에서 생성을 하고 사용한다 -> Spring과 상관 x
+MainBySpring : applicationContext.xml에서 값을 설정 하고 bean을 통해 생성하고 사용 할때는
+bean id를 가져와서 사용한다
+ > resources폴더안에 xml파일을 만든다
