@@ -1,0 +1,5 @@
+[이클립스 단축키 모음]
+
+* getter/setter
+Alt + Shift + S -> R -> Alt + A -> Alt + S -> Enter
+
