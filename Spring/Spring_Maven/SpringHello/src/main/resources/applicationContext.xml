@@ -5,7 +5,7 @@
 
 	<bean id="mvnBuildRunner" class ="net.madvirus.spring4.chap01.MavenBuildRunner">
 		<property name="mavenPath">
-			<value>c:\apache-maven-3.1.1</value>
+			<value>c:\apache-maven-3.1.1 by Spring</value>
 		</property>
 	</bean>
 	
