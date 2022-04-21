@@ -1,0 +1,3 @@
+[git 단축키]
+붙여넣기 : shift + insert
+복사하기 : ctrl + insert
