@@ -60,4 +60,6 @@
       <property name="failLogger" ref="authFailLogger" />
       <property name="userRepository" ref="userRepository" />
    </bean>
+   
+
 </beans>
