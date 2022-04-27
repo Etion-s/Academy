@@ -1,5 +1,7 @@
 [이클립스 단축키 모음]
 
 * getter/setter
-Alt + Shift + S -> R -> Alt + A -> Alt + S -> Enter
+ = Alt + Shift + S -> R -> Alt + A -> Alt + S -> Enter
 
+* 자동 줄 맞춤
+ = ctrl + shift + F
