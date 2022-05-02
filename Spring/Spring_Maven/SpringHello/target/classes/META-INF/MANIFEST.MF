@@ -1,5 +1,9 @@
 Manifest-Version: 1.0
+<<<<<<< HEAD
 Built-By: ehdgu
+=======
+Built-By: DH
+>>>>>>> af4b0f44df967dcfd6bca75487de41bca35ba410
 Build-Jdk: 11.0.13
 Created-By: Maven Integration for Eclipse
 
