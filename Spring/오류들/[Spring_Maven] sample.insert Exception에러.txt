@@ -1,0 +1,16 @@
+Error updating database.  Cause: java.lang.IllegalArgumentException: Mapped Statements collection does not contain value for sample.insertFile
+ -> sample.insertFile에 대한 값이 없다
+
+Cause: java.lang.IllegalArgumentException: Mapped Statements collection does not contain value for sample.insertFile
+  -> sample.insertFile에 대한 값이 없다
+
+first.common.dao.AbstractDAO.insert(AbstractDAO.java:24)
+first.sample.dao.SampleDAO.insertFile(SampleDAO.java:40)
+first.sample.service.SampleServiceImpl.insertBoard(SampleServiceImpl.java:30)
+first.sample.controller.SampleController.insertBoard(SampleController.java:45)
+
+===========================================================
+근데 왜 폴더 생성 및 파일은 넘어오는가?....
+> 생성까지는 완료되고 넘어갈때 문제이다?..?..?
+
+> 그냥 throws Exception을 다시 지우고 다시 작성하였다.....
